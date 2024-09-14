@@ -14,7 +14,7 @@
 }
 
 .banner .swiper-slide:nth-child(1n) {
-  background-color: rgb(206, 17, 17);
+  background-image: url('/src/assets/banner-books/book1.png');
 }
 
 .banner .swiper-slide:nth-child(2n) {
@@ -44,4 +44,16 @@
 .banner .swiper-slide:nth-child(8n) {
   background-color: rgb(0, 68, 255);
 }
+
+.banner .swiper-slide:nth-child(9n) {
+  background-color: rgb(149, 28, 94);
+}
+
+.banner .swiper-slide:nth-child(10n) {
+  background-color: rgb(63, 235, 24);
+}
+
+
+
+
 
