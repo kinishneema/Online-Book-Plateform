@@ -1,27 +1,95 @@
 import React, { useEffect, useState } from "react";
-import { Button, Checkbox, Label, Select, TextInput } from "flowbite-react";
+import {
+  Button,
+  Checkbox,
+  Label,
+  Select,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 
 const Upload = () => {
   const bookscategories = [
-    "I Semester",
-    "II Semester",
-    "III Semester",
-    "IV Semester",
-    "V Semester",
-    "VI Semester",
-    "VII Semester",
-    "VIII Semester",
+    "Fiction",
+    "Non-Fiction",
+
+    "Mistery",
+
+    "Programming",
+
+    "Science Fiction",
+
+    "Fantasy",
+
+    "Horror",
+
+    "Bibliography",
+
+    "Autobiography",
+
+    "History",
+
+    "Self-help",
+
+    "Memoir",
+
+    "Business",
+
+    "Children Books",
+
+    "Travel",
+
+    "Religion",
+
+    "Art and Design",
   ];
   const [selectedbookcategory, setselectedbookcategory] = useState(
     bookscategories[0]
   );
-  const handlechangeselectedvalues = (events) => {
+  const handlechangeselectedvalues = (event) => {
     setselectedbookcategory(event.target.value);
+  };
+
+  const handlebooksubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const bookTitle = form.bookTitle.value;
+    const authorName = form.authorName.value;
+    const imageURL = form.imageURL.value;
+    const category = form.categoryName.value;
+    const bookDescription = form.bookDescription.value;
+    const bookPdfUrl = form.bookPdfUrl.value;
+
+    const bookObj = {
+      bookTitle,
+      authorName,
+      imageURL,
+      category,
+      bookDescription,
+      bookPdfUrl,
+    };
+    console.log(bookObj);
+    fetch("http://localhost:5000/upload-book", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(bookObj),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data)
+        alert("book uploaded sucessfully");
+        form.reset();
+      });
   };
   return (
     <div className="px-4 my-12 ">
       <h2 className="mb-8 text-3xl font-bold">Upload A Book</h2>
-      <form className="flex lg:w-[1180px] flex-col flex-wrap gap-4">
+      <form
+        onSubmit={handlebooksubmit}
+        className="flex lg:w-[1180px] flex-col flex-wrap gap-4"
+      >
         <div className="flex gap-8">
           <div className="lg:w-1/2">
             <div className="mb-2 block">
@@ -63,11 +131,11 @@ const Upload = () => {
           </div>
           <div className="lg:w-1/2">
             <div className="mb-2 block">
-              <Label htmlFor="inputState" value="Select Semester"></Label>
+              <Label htmlFor="categoryName" value="Select Category"></Label>
             </div>
             <Select
-              id="inputState"
-              name="Semester"
+              id="categoryName"
+              name="Select Category"
               className="w-full rounded"
               value={selectedbookcategory}
               onChange={handlechangeselectedvalues}
@@ -80,6 +148,35 @@ const Upload = () => {
             </Select>
           </div>
         </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="bookDescription" value="Book Description" />
+          </div>
+          <Textarea
+            id="bookDescription"
+            name="bookDescription"
+            placeholder="Book Description"
+            required
+            className="w-full pt-2 pl-3"
+            rows={6}
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="bookPdfUrl" value="Book PDF URL" />
+          </div>
+          <TextInput
+            id="bookPdfUrl"
+            type="text"
+            placeholder="book pdf url"
+            required
+            name="bookPdfUrl"
+          />
+        </div>
+
+        <Button type="submit" className="bg-blue-500 hover:bg-blue-700">
+          Upload Book
+        </Button>
       </form>
     </div>
   );
