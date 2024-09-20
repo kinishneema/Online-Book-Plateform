@@ -11,12 +11,20 @@ import {
   HiViewBoards,
 } from "react-icons/hi";
 import userimg from "../assets/profile.png";
+import { useContext } from "react";
+import { authocontext } from "../contexts/Authprovider";
 
 const SideBar = () => {
+  const { user } = useContext(authocontext);
   return (
     <Sidebar aria-label="Sidebar with content separator example">
-      <Sidebar.Logo href="#" img={userimg} imgAlt="Flowbite logo">
-        Flowbite
+      <Sidebar.Logo
+        href="/"
+        img={user?.photoURL ? user.photoURL : userimg}
+        imgAlt="User Logo"
+        className="w-16 h-16"
+      >
+        <p>{user?.displayName || "Demo user"}</p>
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>

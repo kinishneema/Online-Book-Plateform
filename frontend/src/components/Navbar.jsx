@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 //react icons
 import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
+import { authocontext } from "../contexts/Authprovider";
 
 const Navbar = () => {
   const [ismenuopen, setismenuopen] = useState(false);
   const [issticky, setissticky] = useState(false);
+  const { user } = useContext(authocontext);
+  console.log(user);
 
   //toggle menu
   const togglemenu = () => {
@@ -36,7 +39,11 @@ const Navbar = () => {
   ];
   return (
     <header className="w-full bg-transparent fixed top-0 left-0 right-0 transition-all ease-in duration-300">
-      <nav className={`py-4 lg:px-24 px-4 ${issticky ? "sticky top-0 left-0 right-0 bg-blue-100":""}`}>
+      <nav
+        className={`py-4 lg:px-24 px-4 ${
+          issticky ? "sticky top-0 left-0 right-0 bg-blue-100" : ""
+        }`}
+      >
         <div className="flex justify-between items-center text-base gap-8">
           {/* <logo></logo> */}
           <Link
@@ -63,6 +70,7 @@ const Navbar = () => {
             <button>
               <FaBarsStaggered className="w-5 hover:text-blue-700" />
             </button>
+            {/* {user ? user.email : ""} */}
           </div>
 
           {/* menu btn for the mobile device */}
