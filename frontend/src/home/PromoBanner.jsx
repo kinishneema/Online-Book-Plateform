@@ -8,7 +8,7 @@ const PromoBanner = () => {
       <div className="flex flex-col md:flex-row justify-center items-center gap-12">
         <div className="md:w-1/2">
           <h2 className="text-4xl font-bold mb-6 leading-snug">
-            2023 National Book rgpv acropolis most used book
+            one stop solution to crack rgpv examination
           </h2>
           <Link to="/shop" className="block">
             <button className="bg-blue-700 text-white font-semibold px-5 py-2 rounded hover:bg-black transition-all duration-300">
