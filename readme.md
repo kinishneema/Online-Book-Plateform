@@ -1,4 +1,4 @@
-**THIS IS ONLINE-BOOK-PLATEFORM PROJECT**
+**THIS IS ONLINE-BOOK-PLATFORM PROJECT**
 
 ●Developed a Full-stack MERN Application with an authentication system and admin panel for book management whichincludes uploading, editing, deleteing books from inventory.
 <br>
